@@ -17,8 +17,12 @@ export async function pumllocal(generator: string, uml: string) {
 
 export async function pumlserver(serverurl: string, uml: string) {
   try {
-    var encoded = plantumlEncoder.encode(uml)
-    var url = serverurl + '/plantuml/svg/' + encoded
+    let encoded = plantumlEncoder.encode(uml)
+    let sep = "/"
+    if (serverurl.endsWith("/"))
+      sep = ""
+    let url = serverurl + sep + 'plantuml/svg/' + encoded
+    console.log("silverbullet-plantuml: requesting", url)
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
