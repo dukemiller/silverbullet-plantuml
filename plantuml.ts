@@ -8,8 +8,9 @@ export async function pumllocal(generator: string, uml: string) {
     const { stdout, stderr } = await shell.run(generator, [buml]);
     console.log(stderr)
     return stdout;
-  } catch {
-    console.error("PUML generation failed")
+  } catch (error) {
+    console.error("PUML generation failed", error)
+    return error
     // We can ignore, this happens when there's no changes to commit
   }
   return "";
@@ -31,6 +32,7 @@ export async function pumlserver(serverurl: string, uml: string) {
     return data;
   } catch (error) {
     console.error("PUML generation failed", error)
+    return error
     // We can ignore, this happens when there's no changes to commit
   }
   return "";
