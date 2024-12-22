@@ -1,12 +1,10 @@
 import { editor, shell, system } from "@silverbulletmd/silverbullet/syscalls";
 import { readSetting } from "$sb/lib/settings_page.ts";
+import plantumlEncoder from "npm:plantuml-encoder";
 
-
-export async function puml(uml: string) {
+export async function pumllocal(generator: string, uml: string) {
   try {
     const buml = btoa(uml)
-    const userConfig = await readSetting("plantuml");
-    let generator = userConfig.generator
     const { stdout, stderr } = await shell.run(generator, [buml]);
     console.log(stderr)
     return stdout;
@@ -17,10 +15,37 @@ export async function puml(uml: string) {
   return "";
 }
 
+export async function pumlserver(serverurl: string, uml: string) {
+  try {
+    var encoded = plantumlEncoder.encode(uml)
+    var url = serverurl + '/plantuml/svg/' + encoded
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.text()
+    return data;
+  } catch (error) {
+    console.error("PUML generation failed", error)
+    // We can ignore, this happens when there's no changes to commit
+  }
+  return "";
+}
+
 export async function widget(
   bodyText: string,
 ) {
-  let result: string = await puml(bodyText)
+
+  const userConfig = await readSetting("plantuml");
+  let result: string = bodyText
+  if ('serverurl' in userConfig) {
+    result = await pumlserver(userConfig.serverurl, bodyText)
+  } else if ('generator' in userConfig) {
+    result = await pumllocal(userConfig.generator, bodyText)
+  } else {
+    console.error("silverbullet-plantuml: neither serverurl nor generator configured")
+  }
+  userConfig.serverurl
   return {
     html: `<pre id="plantuml">${result}</pre>`,
     script: `
