@@ -1,0 +1,10 @@
+{
+  "tasks": {
+    "build": "silverbullet plug:compile -c deno.jsonc plantuml.plug.yaml",
+    "watch": "silverbullet plug:compile -w -c deno.jsonc plantuml.plug.yaml"
+  },
+  "imports": {
+    "@silverbulletmd/silverbullet": "jsr:@silverbulletmd/silverbullet@^0.10.1",
+    "$sb/": "https://deno.land/x/silverbullet@^0.10.1/plug-api/"
+  }
+}

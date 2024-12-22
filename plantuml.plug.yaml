@@ -1,0 +1,10 @@
+name: plantuml
+version: 0.1
+requiredPermissions:
+  - shell
+assets:
+  - "assets/**/*.*"
+functions:
+  plantumlWidget:
+    path: ./plantuml.ts:widget
+    codeWidget: plantuml

@@ -1,0 +1,7 @@
+{
+  "imports": {
+    "$sb/": "https://deno.land/x/silverbullet@0.10.1/plug-api/",
+    "handlebars": "https://esm.sh/handlebars",
+    "@silverbulletmd/silverbullet": "jsr:@silverbulletmd/silverbullet@^0.10.1"
+  }
+}
