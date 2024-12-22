@@ -8,7 +8,9 @@ Run the {[Plugs: Add]} command and paste in: `github:logeshg5/silverbullet-plant
 
 ### PlantUML Installation
 
-[PlantUML jar](https://plantuml.com/download) needs to be installed in your machine. Ensure you have the JDK installed on your system.
+[PlantUML jar](https://plantuml.com/download) needs to be installed in your machine at e.g., `/usr/local/bin/gen_plantuml_svg`
+
+Ensure you have the JDK installed on your system.
 
 ### Setup Helper Script
 
