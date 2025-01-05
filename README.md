@@ -52,6 +52,8 @@ The configured script is run with plantuml data encoded in base64 format as argu
 
 Create a helper script that decodes the input data and generate diagram. Copy the below contents to a script at e.g., `/usr/local/bin/gen_plantuml_svg`
 
+Helper scripts for Linux & Windows can be found in [scripts](scripts) directory. Take a note to update the plantuml.jar paths.
+
 ```bash
 #!/bin/bash
 echo -e $1 | base64 -d | java -jar /usr/local/bin/plantuml.jar -tsvg -pipe
