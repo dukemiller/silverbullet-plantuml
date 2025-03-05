@@ -22,7 +22,7 @@ export async function pumlserver(serverurl: string, uml: string) {
     let sep = "/"
     if (serverurl.endsWith("/"))
       sep = ""
-    let url = serverurl + sep + 'plantuml/svg/' + encoded
+    let url = serverurl + sep + '/svg/' + encoded
     console.log("silverbullet-plantuml: requesting", url)
     const response = await fetch(url);
     if (!response.ok) {
